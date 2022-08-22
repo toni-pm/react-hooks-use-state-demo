@@ -1,35 +1,9 @@
 import React from 'react'
-import App from '../App'
-import { useAppProvider } from '../App.context'
-
-let stateIndex = -1
-const stateValues = []
-
-const useState = (initialValue, render) => {
-  const currentStateIndex = Number(stateIndex++)
-
-  if (stateValues[currentStateIndex] === undefined) {
-    stateValues[currentStateIndex] = initialValue
-  }
-  const setValue = (newValue) => {
-    stateValues[currentStateIndex] = newValue
-    render()
-  }
-  return [stateValues[currentStateIndex], setValue]
-}
+import { useState } from '../hooks/useState'
 
 const CountersOwn = () => {
-  stateIndex = -1
-  const root = useAppProvider().root
-  const render = () => {
-    root.render(
-      <React.StrictMode>
-        <App root={root} />
-      </React.StrictMode>
-    )
-  }
-  const [counterA, setCounterA] = useState(0, render)
-  const [counterB, setCounterB] = useState(1, render)
+  const [counterA, setCounterA] = useState(0)
+  const [counterB, setCounterB] = useState(0)
 
   return (
     <div>
